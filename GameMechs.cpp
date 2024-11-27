@@ -1,39 +1,40 @@
 #include "GameMechs.h"
+#include "MacUILib.h"
 
 GameMechs::GameMechs()
 {
-    // z = 30, y = 15
-    boardSizeX = 30;
-    boardSizeY = 15;
-    board = new int*[boardSizeX];
+    input = 0;
+    exitFlag = false;
+    loseFlag = false;
+    score = 0;
 
-    for (int i=0; i<boardSizeX; i++)
-        board[i] = new int[boardSizeY];
+    boardSizeX = 20;
+    boardSizeY = 10;
 
 }
 
 GameMechs::GameMechs(int boardX, int boardY)
 {
-    if (boardX<=0)
-        boardX = 30;
-    if (boardY<=0)
-        boardY=15;
+    input = 0;
+    exitFlag = false;
+    loseFlag = false;
+    score = 0;
     
     boardSizeX = boardX;
     boardSizeY = boardY;
 
-    board = new int*[boardSizeX];
+    // board = new int*[boardSizeX];
 
-    for (int i=0; i<boardSizeX; i++)
-        board[i] = new int[boardSizeY];
+    // for (int i=0; i<boardSizeX; i++)
+    //     board[i] = new int[boardSizeY];
 }
 
 // do you need a destructor?
 GameMechs::~GameMechs()
 {
-    for (int i=0; i<boardSizeX; i++)
-        delete[] board[i];
-    delete[] board;
+    // for (int i=0; i<boardSizeX; i++)
+    //     delete[] board[i];
+    // delete[] board;
 }
 
 bool GameMechs::getExitFlagStatus() const
@@ -47,8 +48,10 @@ bool GameMechs::getLoseFlagStatus() const
 }
     
 
-char GameMechs::getInput() const
+char GameMechs::getInput()
 {
+    if (MacUILib_hasChar())
+        input = MacUILib_getChar();
     return input;
 }
 
@@ -80,7 +83,7 @@ void GameMechs::setExitTrue()
 
 void GameMechs::setLoseFlag()
 {
-    loseFlag = false;
+    loseFlag = true;
 }
 
 void GameMechs::setInput(char this_input)
