@@ -54,12 +54,15 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    
+    if (myGM->getInput() == 32)
+        myGM->setExitTrue();
 }
 
 void DrawScreen(void)
 {
+
     MacUILib_clearScreen();   
+    objPos playerPos = myPlayer->getPlayerPos();
     
     int boardX = myGM -> getBoardSizeX(); // 30
     int boardY = myGM -> getBoardSizeY(); // 15
@@ -68,6 +71,8 @@ void DrawScreen(void)
         for(int j=0; j<boardX; j++){
             if (j==0 || j==(boardX-1))
                 MacUILib_printf("#");
+            else if (j==playerPos.pos->x && i==playerPos.pos->y)
+                MacUILib_printf("%c", playerPos.symbol);
             else
                 MacUILib_printf(" ");
         }
