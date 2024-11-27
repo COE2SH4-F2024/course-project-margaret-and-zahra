@@ -40,6 +40,7 @@ int main(void)
 
 void Initialize(void)
 {
+    
     MacUILib_init();
     MacUILib_clearScreen();
 
@@ -49,36 +50,49 @@ void Initialize(void)
 
 void GetInput(void)
 {
-   
+   myGM->collectAsyncInput();
 }
 
 void RunLogic(void)
 {
-    if (myGM->getInput() == 32)
-        myGM->setExitTrue();
+    
 }
 
 void DrawScreen(void)
 {
-
     MacUILib_clearScreen();   
-    objPos playerPos = myPlayer->getPlayerPos();
-    
+
+    objPosArrayList* playerPos = myPlayer->getPlayerPos();
+    int playerSize = playerPos->getSize();
+
+    // objPos foodPos = myGM->getFoodPos();
     int boardX = myGM -> getBoardSizeX(); // 30
     int boardY = myGM -> getBoardSizeY(); // 15
-    MacUILib_printf("####################\n");
     for (int i=0; i<boardY; i++){
         for(int j=0; j<boardX; j++){
-            if (j==0 || j==(boardX-1))
-                MacUILib_printf("#");
-            else if (j==playerPos.pos->x && i==playerPos.pos->y)
-                MacUILib_printf("%c", playerPos.symbol);
+
+            // for(int k=0; k<playerSize; k++){
+            //     objPos thisSeg = playerPos->getElement(k);
+
+            //     // check if the current g=segment x,y pos matches the (j,i) coordinate
+            //     // if yes, print the symbol
+            // }
+
+            // at the end of the for loop, do something to 
+            // determine whether to continue with the if-else statement
+            // or move on to the next iteration of i-j
+
+            if (j==0 || j==boardX - 1 || i==0 || i==boardY - 1)
+                MacUILib_printf("%c", '#');
+            // else if (j==playerPos.pos->x && i==playerPos.pos->y)
+            //     MacUILib_printf("%c", playerPos.symbol);
             else
-                MacUILib_printf(" ");
+                MacUILib_printf("%c", ' ');
         }
         MacUILib_printf("\n");
     }
-    MacUILib_printf("####################\n");
+
+    
 }
 
 void LoopDelay(void)
@@ -89,8 +103,8 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    MacUILib_clearScreen();    
     delete myGM;
     delete myPlayer;
+    MacUILib_clearScreen();    
     MacUILib_uninit();
 }
