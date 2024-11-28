@@ -2,9 +2,21 @@
 #include "MacUILib.h"
 #include "objPos.h"
 
+#include "Player.h"
+#include "GameMechs.h"
+
+
+
 using namespace std;
 
 #define DELAY_CONST 100000
+
+GameMechs *myGM;
+Player *myPlayer; 
+Food* pFood; 
+
+
+
 
 bool exitFlag;
 
