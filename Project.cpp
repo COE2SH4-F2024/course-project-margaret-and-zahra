@@ -48,6 +48,7 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
+    pFood=new Food();
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
 }
