@@ -16,7 +16,7 @@ using namespace std;
 class Food
 {
     private:
-        objPos foodPos; 
+        objPos foodPos; //
 
     public: 
         Food():
