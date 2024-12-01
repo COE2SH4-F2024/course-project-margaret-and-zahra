@@ -109,6 +109,8 @@ void DrawScreen(void)
         MacUILib_printf("\n");
     }
 
+    MacUILib_printf("Score: %d\n", myGM->getScore());
+
 }
 
 void LoopDelay(void)
