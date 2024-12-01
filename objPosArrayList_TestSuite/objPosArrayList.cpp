@@ -3,52 +3,48 @@
 // Check lecture contents on general purpose array list construction, 
 // and modify it to support objPos array list construction.
 
-objPosArrayList::objPosArrayList()
-{
+objPosArrayList::objPosArrayList(){
+    listSize = 0;
+    arrayCapacity = ARRAY_MAX_CAP;
+
+    aList = new objPos[ARRAY_MAX_CAP];
+}
+objPosArrayList::~objPosArrayList(){
+    delete[] aList;
+}
+int objPosArrayList::getSize() const{
+    return listSize;
+}
+void objPosArrayList::insertHead(objPos thisPos){
+    if (listSize < arrayCapacity){
+        for (int i=listSize; i > 0; i--)
+            aList[i] = aList[i-1];
+        aList[0] = thisPos;
+        listSize++;
+    }
+}
+void objPosArrayList::insertTail(objPos thisPos){
+    aList[listSize++] = thisPos;
+}
+void objPosArrayList::removeHead(){
+    if (listSize==0) return;
     
+    if (listSize>0){
+        for (int i=0; i<listSize-1; i++)
+            aList[i] = aList[i+1];
+        listSize--;
+    } 
 }
-
-objPosArrayList::~objPosArrayList()
-{
-
+void objPosArrayList::removeTail(){
+    if (listSize > 0)
+        listSize--;
 }
-
-int objPosArrayList::getSize() const
-{
-
+objPos objPosArrayList::getHeadElement() const{
+    return aList[0];
 }
-
-void objPosArrayList::insertHead(objPos thisPos)
-{
-    
+objPos objPosArrayList::getTailElement() const{
+    return aList[listSize-1];
 }
-
-void objPosArrayList::insertTail(objPos thisPos)
-{
-    
-}
-
-void objPosArrayList::removeHead()
-{
-    
-}
-
-void objPosArrayList::removeTail()
-{
-    
-}
-
-objPos objPosArrayList::getHeadElement() const
-{
-    
-}
-
-objPos objPosArrayList::getTailElement() const
-{
-    
-}
-
-objPos objPosArrayList::getElement(int index) const
-{
-    
+objPos objPosArrayList::getElement(int index) const{
+    return aList[index];
 }

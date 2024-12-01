@@ -2,9 +2,9 @@
 #include "MacUILib.h"
 #include "objPos.h"
 
-#include "Player.h"
+#include "Food.h"
 #include "GameMechs.h"
-
+#include "Player.h"
 
 
 using namespace std;
@@ -13,7 +13,7 @@ using namespace std;
 
 GameMechs *myGM;
 Player *myPlayer;
-Food* pFood; 
+Food *myFood; 
 
 void Initialize(void);
 void GetInput(void);
@@ -48,9 +48,11 @@ void Initialize(void)
     MacUILib_init();
     MacUILib_clearScreen();
 
-    pFood=new Food();
+    myFood=new Food();
     myGM = new GameMechs();
-    myPlayer = new Player(myGM);
+    myPlayer = new Player(myGM, myFood);
+
+    myFood->generateFood(myPlayer->getPlayerPos());
 }
 
 void GetInput(void)
@@ -60,7 +62,10 @@ void GetInput(void)
 
 void RunLogic(void)
 {
-    
+    myPlayer->updatePlayerDir();
+    myPlayer->movePlayer();
+
+    myGM->clearInput();
 }
 
 void DrawScreen(void)
@@ -69,35 +74,41 @@ void DrawScreen(void)
 
     objPosArrayList* playerPos = myPlayer->getPlayerPos();
     int playerSize = playerPos->getSize();
-
-    // objPos foodPos = myGM->getFoodPos();
+    
+    objPos foodPos = myFood->getFoodPos();
+    
     int boardX = myGM -> getBoardSizeX(); // 30
     int boardY = myGM -> getBoardSizeY(); // 15
+
     for (int i=0; i<boardY; i++){
         for(int j=0; j<boardX; j++){
-
-            // for(int k=0; k<playerSize; k++){
-            //     objPos thisSeg = playerPos->getElement(k);
-
-            //     // check if the current g=segment x,y pos matches the (j,i) coordinate
-            //     // if yes, print the symbol
-            // }
-
-            // at the end of the for loop, do something to 
-            // determine whether to continue with the if-else statement
-            // or move on to the next iteration of i-j
-
-            if (j==0 || j==boardX - 1 || i==0 || i==boardY - 1)
+            int isValid;
+            for(int k=0; k<playerSize; k++){
+                objPos thisSeg = playerPos->getElement(k);
+                isValid = 0;
+                if (i==thisSeg.pos->x && j==thisSeg.pos->y){
+                    if (k==0)
+                        MacUILib_printf("%c", thisSeg.symbol);
+                    else
+                        MacUILib_printf("~");
+                    isValid=1;
+                    break;
+                }
+                // check if the current g=segment x,y pos matches the (j,i) coordinate
+                // if yes, print the symbol
+            }
+            if (i==foodPos.pos->x && j==foodPos.pos->y){
+                    MacUILib_printf("%c", foodPos.symbol);
+                }
+            else if (j==0 || j==boardX - 1 || i==0 || i==boardY - 1)
                 MacUILib_printf("%c", '#');
-            // else if (j==playerPos.pos->x && i==playerPos.pos->y)
-            //     MacUILib_printf("%c", playerPos.symbol);
-            else
+            else if (isValid==0)
                 MacUILib_printf("%c", ' ');
+            
         }
         MacUILib_printf("\n");
     }
 
-    
 }
 
 void LoopDelay(void)
@@ -110,6 +121,7 @@ void CleanUp(void)
 {
     delete myGM;
     delete myPlayer;
+    delete myFood;
     //MacUILib_clearScreen();    
     MacUILib_uninit();
 }

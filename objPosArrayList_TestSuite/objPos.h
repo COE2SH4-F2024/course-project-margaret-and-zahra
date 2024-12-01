@@ -2,6 +2,10 @@
 #define OBJPOS_H
 
 // Not really a C++ thing
+typedef struct{
+    int x;
+    int y;
+} Pos;
 
 class objPos
 {

@@ -5,10 +5,7 @@
 #include <time.h>
 
 #include "objPos.h"
-#include "objPosArrayList.h"
 #include "GameMechs.h"
-#include "Player.h"
-#include "MacUILib.h"
 
 using namespace std; 
 
@@ -16,16 +13,16 @@ using namespace std;
 class Food
 {
     private:
+        char input;
         objPos foodPos; //
 
     public: 
-        Food():
-        ~Food(): 
+        Food();
+        ~Food(); 
 
-        void generateFood(GameMechs* gameMechsPtr, objPos blockoff);
-        void getFoodPos(objPos &returnPos); 
-        void setGameMechs( GameMechs* gameMechs);
-
+        void generateFood(objPosArrayList* blockoff);
+        objPos getFoodPos() const; 
+        //void setGameMechs( GameMechs* gameMechs);
 
 };
 
