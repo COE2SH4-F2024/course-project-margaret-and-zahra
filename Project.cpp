@@ -1,6 +1,6 @@
 #include <iostream>
 #include "MacUILib.h"
-#include "objPos.h"
+//#include "objPos.h"
 
 #include "Food.h"
 #include "GameMechs.h"
@@ -65,7 +65,8 @@ void RunLogic(void)
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
 
-    myGM->clearInput();
+    //myGM->clearInput();
+
 }
 
 void DrawScreen(void)
@@ -75,18 +76,23 @@ void DrawScreen(void)
     objPosArrayList* playerPos = myPlayer->getPlayerPos();
     int playerSize = playerPos->getSize();
     
+    
+    int foodPosX = myFood->getFoodPosX();
+    int foodPosY = myFood->getFoodPosY();
+
     objPos foodPos = myFood->getFoodPos();
     
     int boardX = myGM -> getBoardSizeX(); // 30
     int boardY = myGM -> getBoardSizeY(); // 15
 
+    int isValid=0;
+    MacUILib_printf("%c = [%d, %d]\n", foodPos.symbol, foodPosX, foodPosY);
     for (int i=0; i<boardY; i++){
         for(int j=0; j<boardX; j++){
-            int isValid;
             for(int k=0; k<playerSize; k++){
                 objPos thisSeg = playerPos->getElement(k);
                 isValid = 0;
-                if (i==thisSeg.pos->x && j==thisSeg.pos->y){
+                if (i==thisSeg.pos->y && j==thisSeg.pos->x){
                     if (k==0)
                         MacUILib_printf("%c", thisSeg.symbol);
                     else
@@ -97,9 +103,9 @@ void DrawScreen(void)
                 // check if the current g=segment x,y pos matches the (j,i) coordinate
                 // if yes, print the symbol
             }
-            if (i==foodPos.pos->x && j==foodPos.pos->y){
-                    MacUILib_printf("%c", foodPos.symbol);
-                }
+            if (i==foodPosY && j==foodPosX){
+                MacUILib_printf("o");
+            }
             else if (j==0 || j==boardX - 1 || i==0 || i==boardY - 1)
                 MacUILib_printf("%c", '#');
             else if (isValid==0)

@@ -21,7 +21,7 @@ objPos::objPos(int xPos, int yPos, char sym)
 
 
 objPos::~objPos(){
-    delete this->pos;
+    delete[] this-> pos;
 }
 
 void objPos::setObjPos(objPos o)

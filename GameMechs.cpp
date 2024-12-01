@@ -23,18 +23,12 @@ GameMechs::GameMechs(int boardX, int boardY)
     boardSizeX = boardX;
     boardSizeY = boardY;
 
-    // board = new int*[boardSizeX];
-
-    // for (int i=0; i<boardSizeX; i++)
-    //     board[i] = new int[boardSizeY];
 }
 
 // do you need a destructor?
 GameMechs::~GameMechs()
 {
-    // for (int i=0; i<boardSizeX; i++)
-    //     delete[] board[i];
-    // delete[] board;
+
 }
 
 bool GameMechs::getExitFlagStatus() const

@@ -10,8 +10,8 @@ Player::Player(GameMechs* thisGMRef, Food* thisFRef)
     mainFoodRef = thisFRef;
     myDir = STOP;
 
-    objPos headPos(thisGMRef->getBoardSizeY() / 2,
-                    thisGMRef->getBoardSizeX() / 2,
+    objPos headPos(thisGMRef->getBoardSizeX() / 2,
+                    thisGMRef->getBoardSizeY() / 2,
                     'O');
     playerPosList->insertHead(headPos);
     // more actions to be included
@@ -78,48 +78,48 @@ void Player::movePlayer()
 {
     // PPA3 Finite State Machine logic
 
-    objPos first(playerPosList->getHeadElement().pos->x, playerPosList->getHeadElement().pos->y, playerPosList->getElement(0).getSymbol());
-     
-    // first.pos->x = playerPosList->getHeadElement().pos->x;
+    objPos tempHead(playerPosList->getHeadElement().pos->x, playerPosList->getHeadElement().pos->y, playerPosList->getElement(0).getSymbol());
+
+    // tempHead.pos->x = playerPosList->getHeadElement().pos->x;
     // first.pos->y = playerPosList->getHeadElement().pos->y;
     //playerPosList->getHeadElement(first);
 
     switch(myDir){
 
         case LEFT:
-            first.pos->y--;
+            tempHead.pos->x--;
+            if(tempHead.pos->x <1){ // Wrap around logic
+                tempHead.pos->x = mainGameMechsRef-> getBoardSizeX() - 2;
+            }
             break; 
 
         case RIGHT:
-            first.pos->y++;
+            tempHead.pos->x++;
+              if (tempHead.pos->x >= mainGameMechsRef -> getBoardSizeX()-1){
+                tempHead.pos->x=1; 
+            }
             break;
         
         case DOWN:
-            first.pos->x++;
+            tempHead.pos->y++;
+            if (tempHead.pos->y >= mainGameMechsRef-> getBoardSizeY()-1){
+                tempHead.pos->y=1;
+            }
             break;
         
         case UP: 
-            first.pos->x--;
+            tempHead.pos->y--;
+            if (tempHead.pos->y < 1){
+                tempHead.pos->y= (mainGameMechsRef->getBoardSizeY()-2); 
+            }
             break; 
 
         default:
             break; 
     }
 
-
-    if(first.pos->y <1){ // Wrap around logic
-        first.pos->y = mainGameMechsRef-> getBoardSizeX() - 2;
-    } else if (first.pos->y >= mainGameMechsRef -> getBoardSizeX()-1){
-        first.pos->y=1; 
-    }
-    if (first.pos->x >= mainGameMechsRef-> getBoardSizeY()-1){
-        first.pos->x=1;
-    } else if (first.pos->x < 1){
-        first.pos->x= mainGameMechsRef->getBoardSizeY()-2; 
-    } 
-    
-    playerPosList->insertHead(first);
-    
+    playerPosList->insertHead(tempHead);
+        
     if (playerPosList->getHeadElement().pos->x == mainFoodRef->getFoodPos().pos->x 
         && playerPosList->getHeadElement().pos->y==mainFoodRef->getFoodPos().pos->y){ // check for food collision
             mainFoodRef->generateFood(playerPosList);
@@ -128,14 +128,14 @@ void Player::movePlayer()
         playerPosList->removeTail();
     }
     
-    objPos playerTemp; 
-    for (int i = 1; i < playerPosList->getSize(); i++){ // check for overlap
-        playerTemp = playerPosList->getElement(i);
-        if (first.pos->x == playerTemp.pos->x && first.pos->y == playerTemp.pos->y){
-            mainGameMechsRef->setLoseFlag();
-            mainGameMechsRef->setExitTrue();
-        }
-    }
+    // objPos playerTemp; 
+    // for (int i = 1; i < playerPosList->getSize(); i++){ // check for overlap
+    //     playerTemp = playerPosList->getElement(i);
+    //     if (tempHead.pos->x == playerTemp.pos->x && tempHead.pos->y == playerTemp.pos->y){
+    //         mainGameMechsRef->setLoseFlag();
+    //         mainGameMechsRef->setExitTrue();
+    //     }
+    // }
 }
 
 

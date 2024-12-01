@@ -7,6 +7,8 @@ Food::Food()
     foodPos.pos->x = -10;
     foodPos.pos->y = -10;
     foodPos.symbol = 'o';
+
+    srand(time(nullptr));
 }
 
 // Food::Food(int foodBoardX, int foodBoardY)
@@ -26,12 +28,11 @@ Food::~Food()
 
 void Food::generateFood(objPosArrayList* blockOff)
 {
-    srand(static_cast<unsigned int>(time(0))); // Seed random num gen
     int size = blockOff->getSize();
     bool isValid = false;
 
-    int sizeX = 20;
-    int sizeY = 10;
+    const int sizeX = 20;
+    const int sizeY = 10;
 
     while (!isValid){
         isValid = true;
@@ -43,18 +44,23 @@ void Food::generateFood(objPosArrayList* blockOff)
             if (foodPos.pos->x==blockOff->getElement(i).pos->x
                 && foodPos.pos->y==blockOff->getElement(i).pos->y){
                     isValid = false; // Wrong food coords
+                    break;
                 }
         }
-
-        
         foodPos.setObjPos(foodPos.pos->x, foodPos.pos->y, 'o');
     }
 }
 
-objPos Food::getFoodPos(/*objPos &returnPos*/) const
-{
-    foodPos.pos->x=2;
-    foodPos.pos->y=14;
-    return foodPos;
-    //return returnPos.setObjPos(foodPos.pos->x, foodPos.pos->y, foodPos.symbol);
+int Food::getFoodPosX() const{
+    return foodPos.pos->x;
 }
+
+int Food::getFoodPosY() const{
+    return foodPos.pos->y;
+}
+
+objPos Food::getFoodPos() const
+{
+    //return this->foodPos;
+}
+

@@ -23,6 +23,8 @@ class Food
         void generateFood(objPosArrayList* blockoff);
         objPos getFoodPos() const; 
         //void setGameMechs( GameMechs* gameMechs);
+        int getFoodPosX() const;
+        int getFoodPosY() const;
 
 };
 
