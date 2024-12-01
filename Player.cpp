@@ -120,9 +120,10 @@ void Player::movePlayer()
 
     playerPosList->insertHead(tempHead);
         
-    if (playerPosList->getHeadElement().pos->x == mainFoodRef->getFoodPos().pos->x 
-        && playerPosList->getHeadElement().pos->y==mainFoodRef->getFoodPos().pos->y){ // check for food collision
+    if (playerPosList->getHeadElement().pos->x == mainFoodRef->getFoodPosX() 
+        && playerPosList->getHeadElement().pos->y==mainFoodRef->getFoodPosY()){ // check for food collision
             mainFoodRef->generateFood(playerPosList);
+            //playerPosList->insertHead(tempHead);
             mainGameMechsRef->incrementScore();
     } else{ // moving mech
         playerPosList->removeTail();

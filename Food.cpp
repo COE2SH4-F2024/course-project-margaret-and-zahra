@@ -6,7 +6,7 @@ Food::Food()
 
     foodPos.pos->x = -10;
     foodPos.pos->y = -10;
-    foodPos.symbol = 'o';
+    foodPos.symbol = '*';
 
     srand(time(nullptr));
 }
@@ -47,7 +47,7 @@ void Food::generateFood(objPosArrayList* blockOff)
                     break;
                 }
         }
-        foodPos.setObjPos(foodPos.pos->x, foodPos.pos->y, 'o');
+        foodPos.setObjPos(foodPos.pos->x, foodPos.pos->y, '*');
     }
 }
 

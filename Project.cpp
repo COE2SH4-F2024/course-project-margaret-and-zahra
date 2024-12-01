@@ -96,7 +96,7 @@ void DrawScreen(void)
                     if (k==0)
                         MacUILib_printf("%c", thisSeg.symbol);
                     else
-                        MacUILib_printf("~");
+                        MacUILib_printf("o");
                     isValid=1;
                     break;
                 }
@@ -104,7 +104,7 @@ void DrawScreen(void)
                 // if yes, print the symbol
             }
             if (i==foodPosY && j==foodPosX){
-                MacUILib_printf("o");
+                MacUILib_printf("*");
             }
             else if (j==0 || j==boardX - 1 || i==0 || i==boardY - 1)
                 MacUILib_printf("%c", '#');
