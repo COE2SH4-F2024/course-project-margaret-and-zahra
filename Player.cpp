@@ -123,16 +123,14 @@ void Player::movePlayer()
     if (playerPosList->getHeadElement().pos->x == mainFoodRef->getFoodPosX() 
         && playerPosList->getHeadElement().pos->y==mainFoodRef->getFoodPosY()){ // check for food collision
             mainFoodRef->generateFood(playerPosList);
-            //playerPosList->insertHead(tempHead);
             mainGameMechsRef->incrementScore();
     } else{ // moving mech
         playerPosList->removeTail();
     }
     
-    // objPos playerTemp; 
-    // for (int i = 1; i < playerPosList->getSize(); i++){ // check for overlap
-    //     playerTemp = playerPosList->getElement(i);
-    //     if (tempHead.pos->x == playerTemp.pos->x && tempHead.pos->y == playerTemp.pos->y){
+    // for (int i = 4; i < playerPosList->getSize(); i++){ // check for overlap
+    //     objPos playerTemp = playerPosList->getElement(i);
+    //     if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){
     //         mainGameMechsRef->setLoseFlag();
     //         mainGameMechsRef->setExitTrue();
     //     }

@@ -80,13 +80,13 @@ void DrawScreen(void)
     int foodPosX = myFood->getFoodPosX();
     int foodPosY = myFood->getFoodPosY();
 
-    objPos foodPos = myFood->getFoodPos();
+    ///objPos foodPos = myFood->getFoodPos();
     
     int boardX = myGM -> getBoardSizeX(); // 30
     int boardY = myGM -> getBoardSizeY(); // 15
 
     int isValid=0;
-    MacUILib_printf("%c = [%d, %d]\n", foodPos.symbol, foodPosX, foodPosY);
+    MacUILib_printf("%c = [%d, %d]\n", '*', foodPosX, foodPosY);
     for (int i=0; i<boardY; i++){
         for(int j=0; j<boardX; j++){
             for(int k=0; k<playerSize; k++){
