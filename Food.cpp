@@ -44,9 +44,9 @@ void Food::generateFood(objPosArrayList* blockOff)
     }
 }
 
-void Food::generateFood(objPosArrayList* playerPosList){
+// void Food::generateFood(objPosArrayList* playerPosList){ //  food bucket
 
-}
+// }
 
 int Food::getFoodPosX() const{
     return foodPos.pos->x;

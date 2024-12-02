@@ -63,7 +63,6 @@ objPos objPosArrayList::getHeadElement() const
     return aList[0]; // return the head element
 }
 
-<<<<<<< HEAD
 objPos objPosArrayList::getTailElement() const
 {
     return aList[listSize - 1]; // return the tail element
@@ -79,19 +78,3 @@ objPos objPosArrayList::getElement(int index) const
 
     return aList[index];
 }
-=======
-
-// objPos objPosArrayList::getElement(objPos &returnPos, int index) const{
-//     if (index >=0 && index<sizeList){
-//         returnPos.setObjPos(aList[index]);
-//     }else{
-
-//         return aList[index];
-
-//     }
-    
-    
-// }
-
-// Are other methods needed? (Copy constructor, etc.)
->>>>>>> 78dd8a2b962f4426f6dd9994f35199db04668301
