@@ -64,9 +64,6 @@ void RunLogic(void)
 {
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
-
-    //myGM->clearInput();
-
 }
 
 void DrawScreen(void)
@@ -82,11 +79,11 @@ void DrawScreen(void)
 
     ///objPos foodPos = myFood->getFoodPos();
     
-    int boardX = myGM -> getBoardSizeX(); // 30
-    int boardY = myGM -> getBoardSizeY(); // 15
+    int boardX = myGM -> getBoardSizeX(); // 20
+    int boardY = myGM -> getBoardSizeY(); // 10
 
     int isValid=0;
-    MacUILib_printf("%c = [%d, %d]\n", '*', foodPosX, foodPosY);
+    MacUILib_printf("Snake Game\n");
     for (int i=0; i<boardY; i++){
         for(int j=0; j<boardX; j++){
             for(int k=0; k<playerSize; k++){
@@ -115,18 +112,38 @@ void DrawScreen(void)
         MacUILib_printf("\n");
     }
 
+    
+
     MacUILib_printf("Score: %d\n", myGM->getScore());
+    // MacUILib_printf("\nDEBUG\n"); //Prints coords of each body element
+    // for(int k=0; k<playerSize; k++){
+    //     objPos thisSeg = playerPos->getElement(k);
+    //         if (k==0){
+    //             MacUILib_printf("%c = [%d, %d]\n", thisSeg.symbol, thisSeg.pos->x, thisSeg.pos->y);
+    //             }
+    //         else{
+    //             MacUILib_printf("o = [%d, %d]\n", thisSeg.pos->x, thisSeg.pos->y);
+    //             }
+    // }
+    // MacUILib_printf("\n");
 
 }
 
+
 void LoopDelay(void)
 {
-    MacUILib_Delay(DELAY_CONST); // 0.1s delay
+    MacUILib_Delay(DELAY_CONST);
+
 }
 
 
 void CleanUp(void)
 {
+    if (myGM->getLoseFlagStatus() == true)
+        MacUILib_printf("\nLose.\n");
+    else if (myGM->getExitFlagStatus() == true)
+        MacUILib_printf("\nGame Exit.\n");
+    
     delete myGM;
     delete myPlayer;
     delete myFood;

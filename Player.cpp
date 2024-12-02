@@ -80,10 +80,6 @@ void Player::movePlayer()
 
     objPos tempHead(playerPosList->getHeadElement().pos->x, playerPosList->getHeadElement().pos->y, playerPosList->getElement(0).getSymbol());
 
-    // tempHead.pos->x = playerPosList->getHeadElement().pos->x;
-    // first.pos->y = playerPosList->getHeadElement().pos->y;
-    //playerPosList->getHeadElement(first);
-
     switch(myDir){
 
         case LEFT:
@@ -110,7 +106,7 @@ void Player::movePlayer()
         case UP: 
             tempHead.pos->y--;
             if (tempHead.pos->y < 1){
-                tempHead.pos->y= (mainGameMechsRef->getBoardSizeY()-2); 
+                tempHead.pos->y= mainGameMechsRef->getBoardSizeY()-2; 
             }
             break; 
 
@@ -119,56 +115,24 @@ void Player::movePlayer()
     }
 
     playerPosList->insertHead(tempHead);
-        
-    
-    // if(checkSelfCollision()){
-    //     mainGameMechsRef->setLoseFlag();
-    //     mainGameMechsRef->setExitTrue();                 //where to put????
-    //     return;
 
-    // }
     if (playerPosList->getHeadElement().pos->x == mainFoodRef->getFoodPosX() 
         && playerPosList->getHeadElement().pos->y==mainFoodRef->getFoodPosY()){ // check for food collision
-            mainFoodRef->generateFood(playerPosList);
+            mainFoodRef->generateFood(playerPosList); // generate new food
             mainGameMechsRef->incrementScore();
-    } else{
+    } else {
         playerPosList->removeTail(); // moving mech
-       
-
     }
 
-
-
-    // for (int i = 4; i < playerPosList->getSize(); i++){ // check for overlap
-    //     objPos playerTemp = playerPosList->getElement(i);
-    //     if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){               //doesnt work when i=4
-    //         mainGameMechsRef->setLoseFlag();
-    //         mainGameMechsRef->setExitTrue();
-    //     }
-    // }
-
-
-    
-}
-
-bool Player::checkSelfCollision(){
-
-    for (int i = 1; i < playerPosList->getSize(); i++){ 
-        objPos playerTemp=playerPosList->getElement(i); 
-        if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){
-
-            return true;   //collision happened
-        
+    for (int i = 1; i < playerPosList->getSize(); i++){ // check for overlap
+        const objPos playerTemp = playerPosList->getElement(i);
+        if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){     
+            mainGameMechsRef->setLoseFlag();
+            mainGameMechsRef->setExitTrue();
         }
     }
 
-    return false; //no collision 
     
 }
-           
-        
-    
-
-
 
 // More methods to be added

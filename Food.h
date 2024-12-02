@@ -15,6 +15,7 @@ class Food
     private:
         char input;
         objPos foodPos;
+        objPosArrayList* foodBucket;
 
     public: 
         Food();
