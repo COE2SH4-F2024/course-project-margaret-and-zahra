@@ -14,15 +14,18 @@ class Food
 {
     private:
         char input;
-        objPos foodPos; //
+        objPos foodPos;
 
     public: 
         Food();
         ~Food(); 
 
+        // Food(const Food &f);
+        // Food& operator = (const Food &f);
+
         void generateFood(objPosArrayList* blockoff);
         objPos getFoodPos() const; 
-        //void setGameMechs( GameMechs* gameMechs);
+        
         int getFoodPosX() const;
         int getFoodPosY() const;
 

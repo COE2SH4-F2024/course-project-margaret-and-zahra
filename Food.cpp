@@ -11,15 +11,6 @@ Food::Food()
     srand(time(nullptr));
 }
 
-// Food::Food(int foodBoardX, int foodBoardY)
-// {
-//     foodPos.pos->x = -10;
-//     foodPos.pos->y = -10;
-//     foodPos.symbol = 'o';
-
-//     boardX = foodBoardX;
-//     boardY = foodBoardY;
-// }
 
 Food::~Food()
 {
@@ -61,6 +52,6 @@ int Food::getFoodPosY() const{
 
 objPos Food::getFoodPos() const
 {
-    //return this->foodPos;
+    return foodPos;
 }
 

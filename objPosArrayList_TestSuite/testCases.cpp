@@ -413,7 +413,53 @@ void testRemoveTail_5Element()
 	tearDown(result);
 }
 
+// EXTRA Test Case 1 - insertTail 1x to element list 
+void testInsertTail_Extra1()
+{
+	printf("\n=== testInsertTail_Extra1() ===\n");
+	bool result = true; // true;
 
+	objPos currentPos;
+	objPos samplePos(2, 5, 'a');  
+
+	// Insert 1 sample element
+	objPosArrayList thisList;
+	thisList.insertTail(samplePos);
+
+	int expectedSize = 1;
+	int actualSize = thisList.getSize();
+		
+	// First check the list size is 1
+	result &= assert_equal(expectedSize, actualSize);
+
+	// The destructor will be called automatically for stack-allocated objects
+
+	tearDown(result);
+}
+
+// EXTRA Test Case 2 - insertHead 2x to element list
+void testRemoveHead_Extra2()
+{
+	printf("\n=== testRemoveHead_Extra2() ===\n");
+	bool result = true; // true;
+
+	objPos currentPos;
+	objPos samplePos(2, 5, 'a');  
+
+	// Insert 1 sample element
+	objPosArrayList thisList;
+	thisList.insertHead(samplePos);
+	thisList.insertHead(samplePos);
+	
+
+	int expectedSize = 2;
+	int actualSize = thisList.getSize();
+		
+	result &= assert_equal(expectedSize, actualSize);
+	// The destructor will be called automatically for stack-allocated objects
+
+	tearDown(result);
+}
 
 
 //===========================================================
@@ -432,6 +478,9 @@ void testRemoveTail_5Element()
 
 		testRemoveTail_1Element();
 		testRemoveTail_5Element();
+
+		testInsertTail_Extra1();
+		testRemoveHead_Extra2();
 		
 		return (successCount == totalAssertions);
 	}
