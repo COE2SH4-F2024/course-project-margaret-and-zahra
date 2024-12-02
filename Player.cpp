@@ -120,22 +120,54 @@ void Player::movePlayer()
 
     playerPosList->insertHead(tempHead);
         
+    
+    // if(checkSelfCollision()){
+    //     mainGameMechsRef->setLoseFlag();
+    //     mainGameMechsRef->setExitTrue();                 //where to put????
+    //     return;
+
+    // }
     if (playerPosList->getHeadElement().pos->x == mainFoodRef->getFoodPosX() 
         && playerPosList->getHeadElement().pos->y==mainFoodRef->getFoodPosY()){ // check for food collision
             mainFoodRef->generateFood(playerPosList);
             mainGameMechsRef->incrementScore();
-    } else{ // moving mech
-        playerPosList->removeTail();
+    } else{
+        playerPosList->removeTail(); // moving mech
+       
+
     }
-    
+
+
+
     // for (int i = 4; i < playerPosList->getSize(); i++){ // check for overlap
     //     objPos playerTemp = playerPosList->getElement(i);
-    //     if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){
+    //     if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){               //doesnt work when i=4
     //         mainGameMechsRef->setLoseFlag();
     //         mainGameMechsRef->setExitTrue();
     //     }
     // }
+
+
+    
 }
+
+bool Player::checkSelfCollision(){
+
+    for (int i = 1; i < playerPosList->getSize(); i++){ 
+        objPos playerTemp=playerPosList->getElement(i); 
+        if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){
+
+            return true;   //collision happened
+        
+        }
+    }
+
+    return false; //no collision 
+    
+}
+           
+        
+    
 
 
 
