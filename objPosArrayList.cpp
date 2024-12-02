@@ -52,4 +52,17 @@ objPos objPosArrayList::getElement(int index) const{
     return aList[index];
 }
 
+
+// objPos objPosArrayList::getElement(objPos &returnPos, int index) const{
+//     if (index >=0 && index<sizeList){
+//         returnPos.setObjPos(aList[index]);
+//     }else{
+
+//         return aList[index];
+
+//     }
+    
+    
+// }
+
 // Are other methods needed? (Copy constructor, etc.)

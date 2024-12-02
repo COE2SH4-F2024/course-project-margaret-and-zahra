@@ -153,10 +153,11 @@ void Player::movePlayer()
 
 bool Player::checkSelfCollision(){
 
+
     for (int i = 1; i < playerPosList->getSize(); i++){ 
         objPos playerTemp=playerPosList->getElement(i); 
         if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){
-
+            
             return true;   //collision happened
         
         }
