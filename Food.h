@@ -25,6 +25,7 @@ class Food
         // Food& operator = (const Food &f);
 
         void generateFood(objPosArrayList* blockoff);
+        //void generateFood(objPosArrayList* playerPosList);
         objPos getFoodPos() const; 
         
         int getFoodPosX() const;

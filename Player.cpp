@@ -124,11 +124,37 @@ void Player::movePlayer()
         playerPosList->removeTail(); // moving mech
     }
 
+<<<<<<< HEAD
     for (int i = 1; i < playerPosList->getSize(); i++){ // check for overlap
         const objPos playerTemp = playerPosList->getElement(i);
         if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){     
             mainGameMechsRef->setLoseFlag();
             mainGameMechsRef->setExitTrue();
+=======
+
+
+    // for (int i = 4; i < playerPosList->getSize(); i++){ // check for overlap
+    //     objPos playerTemp = playerPosList->getElement(i);
+    //     if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){               //doesnt work when i=4
+    //         mainGameMechsRef->setLoseFlag();
+    //         mainGameMechsRef->setExitTrue();
+    //     }
+    // }
+
+
+    
+}
+
+bool Player::checkSelfCollision(){
+
+
+    for (int i = 1; i < playerPosList->getSize(); i++){ 
+        objPos playerTemp=playerPosList->getElement(i); 
+        if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){
+            
+            return true;   //collision happened
+        
+>>>>>>> 78dd8a2b962f4426f6dd9994f35199db04668301
         }
     }
 
