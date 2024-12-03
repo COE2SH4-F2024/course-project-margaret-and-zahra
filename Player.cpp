@@ -124,7 +124,7 @@ void Player::movePlayer()
         playerPosList->removeTail(); // moving mech
     }
 
-    for (int i = 1; i < playerPosList->getSize(); i++){ // check for overlap
+    for (int i = 1; i < playerPosList->getSize(); i++){ // check for collision
         const objPos playerTemp = playerPosList->getElement(i);
         if (playerPosList->getHeadElement().isPosEqual(&playerTemp)){     
             mainGameMechsRef->setLoseFlag();

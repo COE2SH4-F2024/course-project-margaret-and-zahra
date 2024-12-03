@@ -8,7 +8,7 @@ Food::Food()
     foodPos.pos->y = -10;
     foodPos.symbol = '*';
 
-    // foodBucket= new objPosArrayList(); //new objposarraylist storing food items on heap
+    
 
     srand(time(nullptr));
 }
@@ -16,7 +16,7 @@ Food::Food()
 
 Food::~Food()
 {
-    // delete foodBucket; 
+    
 }
 
 void Food::generateFood(objPosArrayList* blockOff)
@@ -44,9 +44,7 @@ void Food::generateFood(objPosArrayList* blockOff)
     }
 }
 
-// void Food::generateFood(objPosArrayList* playerPosList){ //  food bucket
 
-// }
 
 int Food::getFoodPosX() const{
     return foodPos.pos->x;

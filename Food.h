@@ -13,22 +13,22 @@ using namespace std;
 class Food
 {
     private:
-        char input;
-        objPos foodPos;
-        objPosArrayList* foodBucket;
+        char input;                //for user input
+        objPos foodPos;                 
+        
 
     public: 
         Food();
         ~Food(); 
 
-        // Food(const Food &f);
-        // Food& operator = (const Food &f);
+       
+        
 
-        void generateFood(objPosArrayList* blockoff);
-        //void generateFood(objPosArrayList* playerPosList);
+        void generateFood(objPosArrayList* blockoff);  //randomly generate food pos avoiding boundaries
+        
         objPos getFoodPos() const; 
         
-        int getFoodPosX() const;
+        int getFoodPosX() const;        //get x and y corods respectively
         int getFoodPosY() const;
 
 };
